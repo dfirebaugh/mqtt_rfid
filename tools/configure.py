@@ -13,5 +13,7 @@ config.save_config(config={
     "MQTT_TOPIC_PREFIX": "frontdoor",
     "MQTT_CLIENT_ID": "door_testing_random_mqtt_client_1029381029487124",
     "WIFI_SSID": "",
-    "WIFI_PASSWORD": ""
+    "WIFI_PASSWORD": "",
+    "RELAY_PIN": 16,
+    "RELAY_DURATION": 5, # seconds
 })

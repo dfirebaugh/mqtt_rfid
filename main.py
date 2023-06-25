@@ -6,6 +6,7 @@ from lib.door import DoorControl
 from lib.event import EventManager
 from lib.mqtt import MQTTWrapper
 from lib.wifi import NetManager
+from lib.relay import Relay
 
 import utime
 
@@ -15,7 +16,7 @@ config = ConfigManager('cnf')
 mqtt = MQTTWrapper(server=config.get("MQTT_BROKER"), user=config.get("MQTT_USER"), password=config.get("MQTT_PASSWORD"), client_id=config.get("MQTT_CLIENT_ID"))
 acl = AccessControlList('acl')
 event = EventManager(config, acl, mqtt)
-door = AccessControlSystem(config, acl, reader, DoorControl(event))
+door = AccessControlSystem(config, acl, reader, DoorControl(event, config, Relay(config)))
 
 wifi = NetManager(event, config.get("WIFI_SSID"), config.get("WIFI_PASSWORD"))
 
