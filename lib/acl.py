@@ -26,7 +26,11 @@ class AccessControlList:
         self.users = self.load()
 
     def add(self, user):
-        user_decoded = user.decode('utf8').upper()
+        if isinstance(user, bytes):
+            user_decoded = user.decode('utf8').upper()
+        else:
+            user_decoded = user.upper()
+
         if user_decoded not in self.users:
             self.users.append(user_decoded)
         self.save()
@@ -36,7 +40,11 @@ class AccessControlList:
             self.add(user)
 
     def remove(self, user):
-        user_decoded = user.decode('utf8').upper()
+        if isinstance(user, bytes):
+            user_decoded = user.decode('utf8').upper()
+        else:
+            user_decoded = user.upper()
+
         if user_decoded in self.users:
             self.users.remove(user_decoded)
         self.save()
@@ -54,4 +62,5 @@ class AccessControlList:
         return hash_value
 
     def has_user(self, user):
-        return user.upper() in self.users
+        user_upper = user.upper()
+        return user_upper in self.users
